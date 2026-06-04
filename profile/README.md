@@ -232,7 +232,7 @@ Equipe extraída do histórico Git dos três repositórios (`git log --all`).
 | **Lucas Cerqueira Galvão** | Desenvolvimento (backend + frontend + docs) | <lucasgalvao134@gmail.com> | backend · frontend · docs |
 | **Lucas Carmona Neto** | Desenvolvimento (backend + frontend + docs) | <lucascarmonaneto510@gmail.com> | backend · frontend · docs |
 | **João Gabriel Catalão** | Desenvolvimento (backend) | <joaogabriel3556@gmail.com> | backend |
-| **Felipe Barbosa dos Santos** | Documentação e modelagem | — | docs |
+| **Felipe Barbosa dos Santos** | Documentação e modelagem | <felipebsantos@unisantos.br> | docs |
 | **Felipe Monteiro** | Documentação e modelagem | <felipemonteiro@unisantos.br> | docs |
 
 ---

@@ -4,10 +4,16 @@
 
 # Explora+
 
-**Planejador de rotas turísticas a pé com descoberta automática de POIs**
+**Planejador de rotas turísticas pedestres com descoberta automática de POIs no OpenStreetMap**
 
 Projeto acadêmico da Universidade Católica de Santos (UniSantos) — disciplina de Projeto de Conclusão (PCE).
-O sistema gera rotas pedestres entre dois pontos, sugere POIs (cultura, parques, comida) ao longo do caminho, enriquece cada POI com dados do OSM/Wikidata/Wikipedia e mantém uma biblioteca pessoal de lugares visitados pelo usuário.
+Dado um par origem/destino, o Explora+ calcula a rota a pé via **OSRM (modo `foot`)**, descobre Pontos de Interesse (POIs) próximos via **Overpass API**, enriquece cada POI progressivamente com dados do **Nominatim, Wikidata e Wikipedia** e persiste tudo num catálogo canônico (`places.Place`) com geometria PostGIS. Cada usuário autenticado tem uma biblioteca pessoal (`UserPlaceState`) que rastreia o que já viu, visitou ou removeu de uma rota.
+
+**Escopo intencionalmente recortado** (ver [decisões de modelagem](https://github.com/EXPLORA-PLUS/explora-plus-docs/blob/main/MODELAGEM.md#decisoes-de-modelagem)):
+- Apenas caminhada — sem carro, bike ou transporte público
+- Apenas POIs do OSM em 3 categorias: **Cultura, Parques, Comida**
+- Sem fluxo de compra de ingresso (endpoint `tickets` é mockado)
+- Sem painel de Administrador no app — lugares vêm de `seed_demo` (curadoria inicial de Santos) e da descoberta automática do Overpass
 
 </div>
 
@@ -59,14 +65,23 @@ explora_plus/
 <img src="https://raw.githubusercontent.com/EXPLORA-PLUS/.github/main/profile/assets/app-explorar.png" alt="Tela Explorar do Explora+ — mapa com rota turística, POIs numerados e resumo da rota" width="320" />
 </div>
 
-O fluxo principal do MVP é:
+### Atores
 
-1. O usuário cria conta ou faz login.
-2. A tela **Explorar** tenta reabrir a rota atual salva; se não houver, gera uma rota de exemplo na Av. Paulista.
-3. O backend geocodifica origem/destino, calcula a rota pedestre (OSRM), descobre POIs próximos (Overpass) e materializa cada POI em `places.Place`.
-4. O mapa mostra origem, destino, linha da rota e POIs filtráveis por **Cultura / Parques / Comida**.
-5. O usuário pode abrir o detalhe de um POI (enriquecido em background com Nominatim + Wikidata + Wikipedia), marcar como visitado ou excluir da rota atual.
-6. A aba **Lugares** vira a biblioteca pessoal de POIs que já apareceram em rotas do usuário.
+A modelagem distingue dois atores ([UC1–UC12](https://github.com/EXPLORA-PLUS/explora-plus-docs/blob/main/MODELAGEM.md#casos-de-uso)):
+
+- **Visitante (anônimo)** — pode visualizar o mapa com rota e POIs, filtrar por categoria, criar conta e fazer login.
+- **Turista (autenticado, *estende* Visitante)** — gera rotas turísticas, abre detalhe de POI, marca/desmarca como visitado, exclui POIs da rota atual, vê biblioteca pessoal de lugares e perfil.
+
+### Fluxo do app
+
+1. **Bootstrap da sessão** — `AuthContext` tenta `POST /api/auth/refresh/` com o refresh token em storage; se falhar, cai em estado anônimo.
+2. **Tela Explorar** — chama `GET /api/tour-routes/current/`. Se 404 (sem rota salva), dispara `POST /api/tour-routes/` com origem/destino padrão (Praça Oswaldo Cruz → Edifício Gibraltar, Av. Paulista).
+3. **Planner do backend** — geocodifica via **Nominatim**, calcula rota pedestre via **OSRM**, busca POIs na bbox via **Overpass** e faz upsert em `places.Place`. Resultado entra em `RouteSearchCache` por chave canônica (origem+destino), evitando recálculos.
+4. **Renderização** — `MapView` (Leaflet em `WebView` mobile / `iframe` web) desenha polyline + marcadores. POIs filtráveis por **Todos / Cultura / Parques / Comida**.
+5. **Pré-busca em background** — após carregar a rota, o frontend pré-busca o detalhe de todos os POIs em background (400 ms entre chamadas), pra que abrir o modal seja instantâneo.
+6. **Detalhe de POI** — `GET /api/tour-routes/pois/<stop_id>/` enriquece progressivamente: Nominatim (endereço, horários, `wikidata_id`) → Wikidata (imagem P18) → fallback de busca Wikipedia em `pt` → `en` se necessário.
+7. **Personalização da rota** — cada `TourRouteStop` tem estado `active → visited → excluded` ([state machine](https://github.com/EXPLORA-PLUS/explora-plus-docs/blob/main/MODELAGEM.md#estados--stop-na-rota)). Ao marcar como visitado, o backend recalcula a rota sem o POI no trajeto ativo.
+8. **Biblioteca pessoal** — aba **Lugares** lista `UserPlaceState` do usuário, com filtros: Todos / Visitados / Não visitados / Rota atual / Excluídos.
 
 ---
 

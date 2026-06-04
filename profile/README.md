@@ -56,7 +56,7 @@ explora_plus/
 ## Visão de produto
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/EXPLORA-PLUS/explora-plus-frontend/main/assets/splash.png" alt="Splash do app Explora+" width="220" />
+<img src="https://raw.githubusercontent.com/EXPLORA-PLUS/.github/main/profile/assets/app-explorar.png" alt="Tela Explorar do Explora+ — mapa com rota turística, POIs numerados e resumo da rota" width="320" />
 </div>
 
 O fluxo principal do MVP é:

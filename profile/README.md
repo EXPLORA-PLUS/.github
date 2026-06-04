@@ -9,12 +9,6 @@
 Projeto acadêmico da Universidade Católica de Santos (UniSantos) — disciplina de Projeto de Conclusão (PCE).
 Dado um par origem/destino, o Explora+ calcula a rota a pé via **OSRM (modo `foot`)**, descobre Pontos de Interesse (POIs) próximos via **Overpass API**, enriquece cada POI progressivamente com dados do **Nominatim, Wikidata e Wikipedia** e persiste tudo num catálogo canônico (`places.Place`) com geometria PostGIS. Cada usuário autenticado tem uma biblioteca pessoal (`UserPlaceState`) que rastreia o que já viu, visitou ou removeu de uma rota.
 
-**Escopo intencionalmente recortado** (ver [decisões de modelagem](https://github.com/EXPLORA-PLUS/explora-plus-docs/blob/main/MODELAGEM.md#decisoes-de-modelagem)):
-- Apenas caminhada — sem carro, bike ou transporte público
-- Apenas POIs do OSM em 3 categorias: **Cultura, Parques, Comida**
-- Sem fluxo de compra de ingresso (endpoint `tickets` é mockado)
-- Sem painel de Administrador no app — lugares vêm de `seed_demo` (curadoria inicial de Santos) e da descoberta automática do Overpass
-
 </div>
 
 ---

@@ -59,6 +59,10 @@ explora_plus/
 <img src="https://raw.githubusercontent.com/EXPLORA-PLUS/.github/main/profile/assets/app-explorar.png" alt="Tela Explorar do Explora+ — mapa com rota turística, POIs numerados e resumo da rota" width="320" />
 </div>
 
+O Explora+ é uma **plataforma de propósito geral** para descoberta e navegação turística pedestre. Por ser construído inteiramente sobre dados abertos globais (OpenStreetMap, Wikidata, Wikipedia), o app não depende de parcerias comerciais locais e pode ser implantado em qualquer município com acervo registrado no OSM.
+
+A entrega atual corresponde à **validação da arquitetura como MVP**: demonstra que o núcleo técnico (roteamento, enriquecimento progressivo de POIs, personalização por usuário) é sólido e escalável. As integrações com plataformas de eventos e mobilidade (Sympla, Uber etc.) e a definição da estratégia de distribuição e monetização constituem a próxima fase.
+
 ### Atores
 
 A modelagem distingue dois atores ([UC1–UC12](https://github.com/EXPLORA-PLUS/explora-plus-docs/blob/main/MODELAGEM.md#casos-de-uso)):
@@ -237,7 +241,19 @@ Equipe extraída do histórico Git dos três repositórios (`git log --all`).
 
 ---
 
+## Status
+
+| Fase | Estado |
+|---|---|
+| Arquitetura central (roteamento + enriquecimento de POIs + personalização) | ✅ Validada |
+| Aprovação do PO e demonstração do protótipo | ✅ Concluída |
+| Modelo de monetização e estratégia de distribuição | 🔜 Próxima fase |
+| Integrações com plataformas de eventos e mobilidade (Sympla, Uber etc.) | 🔜 Pós-monetização |
+
+---
+
 ## Instituição
 
-Projeto desenvolvido na **Universidade Católica de Santos (UniSantos)** como Projeto de Conclusão (PCE).
+Projeto desenvolvido na **Universidade Católica de Santos (UniSantos)** como Projeto de Conclusão (PCE).  
+Organização GitHub: <https://github.com/EXPLORA-PLUS>  
 Paper completo em [`paper/main.pdf`](https://github.com/EXPLORA-PLUS/explora-plus-docs/blob/main/paper/main.pdf) · proposta original em [`paper/proposta-original.pdf`](https://github.com/EXPLORA-PLUS/explora-plus-docs/blob/main/paper/proposta-original.pdf).

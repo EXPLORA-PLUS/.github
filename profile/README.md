@@ -41,7 +41,7 @@ explora_plus/
 |---|---|---|---|
 | **explora-plus-backend** | API REST, planner, autenticação JWT, persistência canônica de lugares e rotas | Django 5.1 · DRF · SimpleJWT · PostgreSQL + PostGIS · Python 3.12 | <https://github.com/EXPLORA-PLUS/explora-plus-backend> |
 | **explora-plus-frontend** | App cliente (web e mobile), mapa Leaflet em WebView/iframe, biblioteca pessoal | Expo 52 · React Native 0.76 · TypeScript · React Navigation 7 | <https://github.com/EXPLORA-PLUS/explora-plus-frontend> |
-| **explora-plus-docs** | Documentação técnica, modelagem, diagramas UML/Mermaid, paper acadêmico | Markdown · Mermaid · Modelio · LaTeX | <https://github.com/EXPLORA-PLUS/explora-plus-docs> |
+| **explora-plus-docs** | Documentação técnica, modelagem, diagramas UML/Mermaid, pacote final do Modelio e papers acadêmicos | Markdown · Mermaid · Modelio · LaTeX | <https://github.com/EXPLORA-PLUS/explora-plus-docs> |
 
 > Para clonar tudo de uma vez:
 > ```bash
@@ -248,7 +248,7 @@ npm run web          # abre o Expo Web (geralmente em http://localhost:8081)
 
 ## Diagramas
 
-Todos os diagramas estão versionados em [`paper/figuras/`](https://github.com/EXPLORA-PLUS/explora-plus-docs/tree/main/paper/figuras) (exportações PNG para paper) e em [`diagramas/mermaid/`](https://github.com/EXPLORA-PLUS/explora-plus-docs/tree/main/diagramas/mermaid) (fontes Mermaid editáveis) no repo `explora-plus-docs`. Neste perfil, a preferência é mostrar os Mermaid diretamente para manter a documentação viva e fácil de atualizar.
+Todos os diagramas estão versionados em [`paper-pce/figuras/`](https://github.com/EXPLORA-PLUS/explora-plus-docs/tree/main/paper-pce/figuras) e [`paper-pcg/figuras/`](https://github.com/EXPLORA-PLUS/explora-plus-docs/tree/main/paper-pcg/figuras) (exportações PNG para paper), em [`diagramas/mermaid/`](https://github.com/EXPLORA-PLUS/explora-plus-docs/tree/main/diagramas/mermaid) (fontes Mermaid editáveis) e no pacote final do Modelio [`explora-plus-diagramas-uml-modelio-final.zip`](https://github.com/EXPLORA-PLUS/explora-plus-docs/blob/main/explora-plus-diagramas-uml-modelio-final.zip) dentro do repo `explora-plus-docs`. Neste perfil, a preferência é mostrar os Mermaid diretamente para manter a documentação viva e fácil de atualizar.
 
 ### Casos de uso
 
